@@ -26,6 +26,7 @@ from flask.cli import FlaskGroup, with_appcontext
 
 from superset import app, appbuilder, cli, security_manager
 from superset.cli.lib import normalize_token
+from superset.cli.load_transit_dashboards import load_transit_dashboards
 from superset.extensions import db
 
 logger = logging.getLogger(__name__)
@@ -49,6 +50,7 @@ for load, module_name, is_pkg in pkgutil.walk_packages(
     cli.__path__, cli.__name__ + "."
 ):
     module = importlib.import_module(module_name)
+    print("LOADED MODULE, ", module)
     for attribute in module.__dict__.values():
         if isinstance(attribute, click.core.Command):
             superset.add_command(attribute)
@@ -60,6 +62,13 @@ def init() -> None:
     """Inits the Superset application"""
     appbuilder.add_permissions(update_perms=True)
     security_manager.sync_role_definitions()
+
+
+@superset.command()
+@with_appcontext
+def load_transit() -> None:
+    """Loads dashboards for TransIT projects"""
+    load_transit_dashboards()
 
 
 @superset.command()

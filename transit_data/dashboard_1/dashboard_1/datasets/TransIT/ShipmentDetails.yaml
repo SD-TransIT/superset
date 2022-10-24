@@ -1,0 +1,205 @@
+table_name: ShipmentDetails
+main_dttm_col: LastModifiedDate
+description: null
+default_endpoint: null
+offset: 0
+cache_timeout: null
+schema: public
+sql: "SELECT DISTINCT \n  public.\"ShipmentDetails\".id as \"ShipmentId\", \n  \"\
+  DeliveryStatus\", \n  \"ShipmentStatus\" ,\n  \"PODStatus\",\n  \"DeliveryDate\"\
+  \ , \n  \"ShipDate\" , \n  public.\"Transporter\".id as \"TransporterId\",\n  public.\"\
+  Transporter\".\"TransporterName\",\n  \"DriverID\", \n  \"DriverName\",\n  \"GPSCoordinates\"\
+  ,\n  \"CustomRouteNumber\"\nFROM \n  public.\"ShipmentDetails\" \nJOIN \n  public.\"\
+  Driver\" \nON \n  public.\"ShipmentDetails\".\"DriverID\" = public.\"Driver\".id\n\
+  JOIN \n  public.\"TransporterDetails\"\nON \n  public.\"TransporterDetails\".id\
+  \ = public.\"ShipmentDetails\".\"TransporterDetailsID\"\nJOIN \n  public.\"Transporter\"\
+  \ \nON \n  public.\"Transporter\".id = public.\"TransporterDetails\".\"TransporterID\"\
+  ;\n"
+params: null
+template_params: null
+filter_select_enabled: false
+fetch_values_predicate: null
+extra: null
+uuid: d9622cba-4313-4fd5-b3ad-7ec165ba1f18
+metrics:
+- metric_name: count
+  verbose_name: COUNT(*)
+  metric_type: null
+  expression: COUNT(*)
+  description: null
+  d3format: null
+  extra:
+    warning_markdown: ''
+  warning_text: null
+columns:
+- column_name: NumberOfDeliveries
+  verbose_name: Number of deliveries
+  is_dttm: false
+  is_active: null
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: Count(*) WHERE DeliveryStatus = 'delivered';
+  description: Number of deliveries finished by driver
+  python_date_format: null
+  extra:
+    warning_markdown: null
+- column_name: DeliveryDate
+  verbose_name: null
+  is_dttm: true
+  is_active: null
+  type: DATETIMETZ
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra:
+    warning_markdown: null
+- column_name: ShipDate
+  verbose_name: null
+  is_dttm: true
+  is_active: null
+  type: DATETIMETZ
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra:
+    warning_markdown: null
+- column_name: GPSCoordinates
+  verbose_name: null
+  is_dttm: false
+  is_active: null
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra:
+    warning_markdown: null
+- column_name: CustomRouteNumber
+  verbose_name: null
+  is_dttm: false
+  is_active: null
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra:
+    warning_markdown: null
+- column_name: DriverID
+  verbose_name: null
+  is_dttm: false
+  is_active: null
+  type: LONGINTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra:
+    warning_markdown: null
+- column_name: DriverName
+  verbose_name: null
+  is_dttm: false
+  is_active: null
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra:
+    warning_markdown: null
+- column_name: PODStatus
+  verbose_name: null
+  is_dttm: false
+  is_active: null
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra:
+    warning_markdown: null
+- column_name: DeliveryStatus
+  verbose_name: null
+  is_dttm: false
+  is_active: null
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra:
+    warning_markdown: null
+- column_name: ShipmentId
+  verbose_name: null
+  is_dttm: false
+  is_active: null
+  type: LONGINTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra:
+    warning_markdown: null
+- column_name: TransporterId
+  verbose_name: null
+  is_dttm: false
+  is_active: null
+  type: LONGINTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra:
+    warning_markdown: null
+- column_name: ShipmentStatus
+  verbose_name: null
+  is_dttm: false
+  is_active: null
+  type: INTEGER
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra:
+    warning_markdown: null
+- column_name: TransporterName
+  verbose_name: null
+  is_dttm: false
+  is_active: null
+  type: STRING
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  extra:
+    warning_markdown: null
+version: 1.0.0
+database_uuid: ae774c16-50f4-474d-8543-aa16a8470a3c

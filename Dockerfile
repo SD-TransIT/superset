@@ -80,6 +80,10 @@ COPY --from=superset-node /app/superset/static/assets /app/superset/static/asset
 
 ## Lastly, let's install superset itself
 COPY superset /app/superset
+
+# Transit Changes
+COPY transit_data /app/transit_data
+
 COPY setup.py MANIFEST.in README.md /app/
 RUN cd /app \
         && chown -R superset:superset * \
@@ -143,4 +147,6 @@ COPY --chown=superset ./docker/docker-ci.sh /app/docker/
 
 RUN chmod a+x /app/docker/*.sh
 
+
 CMD /app/docker/docker-ci.sh
+
