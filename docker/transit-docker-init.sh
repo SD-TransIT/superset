@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -14,33 +15,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-COMPOSE_PROJECT_NAME=superset
+set -e
 
-# database configurations (do not modify)
-DATABASE_DB=superset
-DATABASE_HOST=db
-DATABASE_PASSWORD=superset
-DATABASE_USER=superset
+#
+# Always install local overrides first
+#
+/app/docker/docker-bootstrap.sh
 
-# database engine specific environment variables
-# change the below if you prefers another database engine
-DATABASE_PORT=5432
-DATABASE_DIALECT=postgresql
-POSTGRES_DB=superset
-POSTGRES_USER=superset
-POSTGRES_PASSWORD=superset
-#MYSQL_DATABASE=superset
-#MYSQL_USER=superset
-#MYSQL_PASSWORD=superset
-#MYSQL_RANDOM_ROOT_PASSWORD=yes
+STEP_CNT=1
 
-# Add the mapped in /app/pythonpath_docker which allows devs to override stuff
-PYTHONPATH=/app/pythonpath:/app/docker/pythonpath_dev
-REDIS_HOST=redis
-REDIS_PORT=6379
+echo_step() {
+cat <<EOF
 
-FLASK_ENV=development
-SUPERSET_ENV=development
-SUPERSET_LOAD_EXAMPLES=yes
-CYPRESS_CONFIG=false
-SUPERSET_PORT=8088
+######################################################################
+
+
+Init Step ${1}/${STEP_CNT} [${2}] -- ${3}
+
+
+######################################################################
+
+EOF
+}
+superset --help
+echo_step "1" "Starting" "Loading TransIT dashboards"
+superset load-transit
+echo_step "1" "Complete" "Loading examples"

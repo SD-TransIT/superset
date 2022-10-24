@@ -1,0 +1,12 @@
+allow_ctas: false
+allow_cvas: false
+allow_file_upload: false
+allow_run_async: false
+cache_timeout: null
+database_name: TransIT
+expose_in_sqllab: true
+extra:
+  allows_virtual_table_explore: true
+sqlalchemy_uri: postgres://postgres:postgres@transit_db:5432/TransIT
+uuid: ae774c16-50f4-474d-8543-aa16a8470a3c
+version: 1.0.0
